@@ -1,4 +1,4 @@
-# Student Performance Predictor — End-to-End ML & Flask Deployment
+# Student Performance Predictor — End-to-End ML and DS Project with Flask Deployment
 
 Predict student math scores from demographics and prior scores with a fully scripted ML pipeline, artifact management, and a polished Flask UI for form-based inference.
 
