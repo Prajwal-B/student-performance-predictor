@@ -4,7 +4,8 @@ Predict student math scores from demographics and prior scores with a fully scri
 
 ## Demo
 - Run locally: `python app.py` then open `http://localhost:5000`.
-- (Add a GIF/screenshot of the form → predicted score.)
+<img width="705" height="634" alt="Screenshot 2025-12-11 131901" src="https://github.com/user-attachments/assets/52a1ec56-8932-44ed-a6ff-e1974346e664" />
+
 
 ## Key Features
 - **Full pipeline**: ingestion → preprocessing → model training + tuning → evaluation → artifacts → Flask serving.
@@ -61,7 +62,7 @@ Python, pandas, numpy, scikit-learn, XGBoost, CatBoost, AdaBoost, Random Forest,
 
 ## How to Run (Local)
 1) Python 3.8+; create/activate venv.
-2) `pip install -r requirements.txt` (pin versions; fix malformed lines, e.g., `scikit-learn>=1.2.0`).
+2) `pip install -r requirements.txt` 
 3) Train: `python -m src.pipeline.train_pipeline`
 4) Serve: `python app.py` → open `http://localhost:5000`
 
@@ -81,16 +82,4 @@ notebook/               # EDA/training notebooks
 logs/                   # runtime logs
 ```
 
-## Limitations & Future Work
-- Current features limited to provided schema; add more signals for better accuracy.
-- Add bias/fairness checks, calibration, and model monitoring.
-- Containerize (Docker) and add CI/CD (GitHub Actions).
-- Add unit tests/pytest suite and smoke tests for inference.
-- Add API docs or Swagger if you reintroduce an API.
 
-## Privacy & Security
-- Form inputs are used only for in-memory prediction; no storage.
-
-## License & Contact
-- MIT (or your chosen license).
-- Your name | LinkedIn | Email.
