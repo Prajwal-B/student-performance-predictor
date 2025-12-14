@@ -4,7 +4,7 @@ Predict student math scores from demographics and prior scores with a fully scri
 
 ## Demo
 - Run locally: `python app.py` then open `http://localhost:5000`.
-<img width="705" height="634" alt="Screenshot 2025-12-11 131901" src="https://github.com/user-attachments/assets/52a1ec56-8932-44ed-a6ff-e1974346e664" />
+<img width="705" height="634" alt="Screenshot 2025-12-11 131901" src="https://github.com/user-attachments/assets/4269a4e0-c386-4c0d-8f24-288dc8880c58" />
 
 
 ## Key Features
@@ -70,7 +70,7 @@ Python, pandas, numpy, scikit-learn, XGBoost, CatBoost, AdaBoost, Random Forest,
 ```
 app.py                  # Flask app (form-based inference)
 config.yaml             # Central config
-requirements.txt        # Dependencies (pin versions)
+requirements.txt        # Dependencies
 src/
   components/           # data_ingestion, data_transformation, model_trainer
   pipeline/             # train_pipeline, predict_pipeline
