@@ -1,0 +1,32 @@
+# Configuration file for ML Project
+
+# Model paths
+model:
+  model_path: "artifacts/model.pkl"
+  preprocessor_path: "artifacts/preprocessor.pkl"
+
+# Data paths
+data:
+  raw_data_path: "notebook/data/stud.csv"
+  train_data_path: "artifacts/train.csv"
+  test_data_path: "artifacts/test.csv"
+  raw_data_output_path: "artifacts/data.csv"
+
+# Model training
+training:
+  test_size: 0.2
+  random_state: 42
+  target_column: "math_score"
+
+# Flask app
+app:
+  host: "0.0.0.0"
+  port: 5000
+  debug: false
+
+# Logging
+logging:
+  log_dir: "logs"
+  log_format: "[ %(asctime)s ] %(lineno)d %(name)s - %(levelname)s - %(message)s"
+  log_level: "INFO"
+

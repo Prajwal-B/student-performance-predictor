@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Student Exam Performance Predictor</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: radial-gradient(circle at 10% 20%, #e0f3ff 0%, #f7f9fb 30%, #eef1f6 60%, #d8e7ff 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+        .card {
+            box-shadow: 0 18px 38px rgba(0,0,0,0.08);
+            border: none;
+            border-radius: 18px;
+        }
+        .form-section-title {
+            font-weight: 700;
+            color: #0d6efd;
+            margin-bottom: 4px;
+        }
+        .hint {
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-xl-7">
+            <div class="card p-4 p-md-5">
+                <div class="d-flex align-items-center mb-3">
+                    <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 46px; height: 46px;">
+                        <strong>SP</strong>
+                    </div>
+                    <div class="ms-3">
+                        <h4 class="mb-0">Student Exam Performance Predictor</h4>
+                        <small class="text-muted">Predict math score from demographics and prior scores</small>
+                    </div>
+                </div>
+
+                {% if error %}
+                <div class="alert alert-danger" role="alert">
+                    {{ error }}
+                </div>
+                {% endif %}
+
+                {% if results %}
+                <div class="alert alert-success d-flex align-items-center" role="alert">
+                    <div class="me-2">
+                        <span class="badge bg-success fs-6">Predicted</span>
+                    </div>
+                    <div>
+                        Math Score: <strong>{{ results }}</strong>
+                    </div>
+                </div>
+                {% endif %}
+
+                <form action="{{ url_for('predict_datapoint')}}" method="post" novalidate>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-section-title">Demographics</label>
+                            <div class="form-floating mb-3">
+                                <select class="form-select" id="gender" name="gender" required>
+                                    <option value="" selected disabled>Select gender</option>
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                </select>
+                                <label for="gender">Gender</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <select class="form-select" id="ethnicity" name="ethnicity" required>
+                                    <option value="" selected disabled>Select ethnicity</option>
+                                    <option value="group A">Group A</option>
+                                    <option value="group B">Group B</option>
+                                    <option value="group C">Group C</option>
+                                    <option value="group D">Group D</option>
+                                    <option value="group E">Group E</option>
+                                </select>
+                                <label for="ethnicity">Race or Ethnicity</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <select class="form-select" id="parental_level_of_education" name="parental_level_of_education" required>
+                                    <option value="" selected disabled>Select education</option>
+                                    <option value="associate's degree">Associate's degree</option>
+                                    <option value="bachelor's degree">Bachelor's degree</option>
+                                    <option value="high school">High school</option>
+                                    <option value="master's degree">Master's degree</option>
+                                    <option value="some college">Some college</option>
+                                    <option value="some high school">Some high school</option>
+                                </select>
+                                <label for="parental_level_of_education">Parental Education</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <select class="form-select" id="lunch" name="lunch" required>
+                                    <option value="" selected disabled>Select lunch type</option>
+                                    <option value="free/reduced">Free/Reduced</option>
+                                    <option value="standard">Standard</option>
+                                </select>
+                                <label for="lunch">Lunch Type</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <select class="form-select" id="test_preparation_course" name="test_preparation_course" required>
+                                    <option value="" selected disabled>Select status</option>
+                                    <option value="none">None</option>
+                                    <option value="completed">Completed</option>
+                                </select>
+                                <label for="test_preparation_course">Test Preparation Course</label>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-section-title">Scores</label>
+                            <div class="form-floating mb-3">
+                                <input type="number" class="form-control" id="reading_score" name="reading_score" min="0" max="100" step="0.1" placeholder="Reading score" required>
+                                <label for="reading_score">Reading Score (0-100)</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="number" class="form-control" id="writing_score" name="writing_score" min="0" max="100" step="0.1" placeholder="Writing score" required>
+                                <label for="writing_score">Writing Score (0-100)</label>
+                            </div>
+                            <div class="alert alert-info py-2">
+                                <div class="fw-semibold mb-1">Tips for best predictions:</div>
+                                <ul class="mb-0 ps-3">
+                                    <li>Ensure scores are within 0-100.</li>
+                                    <li>Match categories exactly (e.g., Group A/B/C/D/E).</li>
+                                    <li>Use realistic combinations for better accuracy.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex align-items-center justify-content-between mt-3">
+                        <div class="hint">We never store your inputs; used only for this prediction.</div>
+                        <button class="btn btn-primary px-4" type="submit">
+                            Predict Math Score
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
